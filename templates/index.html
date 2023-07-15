@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Badminton Court Status</title>
+        <style>
+            .counter {
+                display: inline-block;
+                margin: 10px;
+            }
+        </style>
+    </head>
+
+    <body>
+        <h1>Numbers of Players Registered</h1>
+
+        {% for counter in counters %}
+        <div class="counter">
+            <h2> Court {{ loop.index }}</h2>
+            <p id="counter{{ loop.index }}">{{ counter }}</p>
+            <button onclick="incrementCounter({{ loop.index - 1 }})">Add Me</button>
+            <button onclick="decrementCounter({{ loop.index - 1 }})">Cancel</button>
+            <button onclick="clearCounter({{ loop.index - 1 }})">Clear</button>
+        </div>
+        {% endfor %}
+
+        <script src="{{ url_for('static', filename='script.js')  }}"></script>
+    </body>
+</html>
