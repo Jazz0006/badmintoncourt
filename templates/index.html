@@ -3,8 +3,12 @@
 <head>
     <title>Counter Page</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+
     <script>
         var sessionUsername = "{{ sessionUsername }}";
     </script>
@@ -12,15 +16,6 @@
 </head>
 <body>
     <h1>Counter Page</h1>
-    {% with messages = get_flashed_messages() %}
-        {% if messages %}
-            <div class="flash-messages">
-                {% for message in messages %}
-                    <div class="flash-message {{ message[1] }}">{{ message }}</div>
-                {% endfor %}
-            </div>
-        {% endif %}
-    {% endwith %}
     {% if 'username' in session %}
     <p>Welcome, {{ sessionUsername }}!</p>
     <p><a href="{{ url_for('logout') }}">Logout</a></p>
@@ -32,10 +27,10 @@
         <div id="counter-{{ counter }}">
             <h3>Counter {{ counter }}</h3>
             <p>Counter Value: <span id="counter-value-{{ counter }}">{{ counters[counter]['value'] }}</span></p>
-            <p>Registered Users: <span id="registered-users-{{ counter }}">{{ counters[counter]['registered_users']|length }}</span></p>
+            <p>Registered Users: <span id="registered-users-{{ counter }}">{{ counters[counter]['registered_users'] }}</span></p>
             <button class="increment" data-counter="{{ counter }}">+</button>
             <button class="decrement" data-counter="{{ counter }}">-</button>
-            <button class="clear" data-counter="{{ counter }}" {% if counters[counter]['registered_users']|length >= 4 %}disabled{% endif %}>Clear</button>
+            <button class="clear" data-counter="{{ counter }}" >Clear</button>
         </div>
         {% endfor %}
     </div>
